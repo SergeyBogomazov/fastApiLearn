@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from schemas import Book
 
 app = FastAPI()
@@ -37,3 +37,8 @@ def create_book(book: Book):
     return {
         "result": "ok"
     }
+
+
+@app.get('/book')
+def get_book(keywords: list[str] = Query([], description="return book that most suitable for keywords")):
+    return keywords
